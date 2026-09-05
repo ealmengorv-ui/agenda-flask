@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}Agenda{% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-lg-5 mb-4">
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+
+                <h2 class="mb-4">Agregar persona</h2>
+
+                <form method="POST">
+
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" name="nombre" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Apellido</label>
+                        <input type="text" name="apellido" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Fecha de nacimiento</label>
+                        <input type="date" name="fecha_nacimiento" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Día de la semana</label>
+
+                        <select name="dia_semana" class="form-select" required>
+                            <option value="">Seleccione un día</option>
+                            <option value="Lunes">Lunes</option>
+                            <option value="Martes">Martes</option>
+                            <option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option>
+                            <option value="Viernes">Viernes</option>
+                            <option value="Sábado">Sábado</option>
+                            <option value="Domingo">Domingo</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-primary w-100">
+                        Agregar
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-lg-7">
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+
+                <h2 class="mb-4">Listado de agenda</h2>
+
+                {% if agenda %}
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Fecha</th>
+                                <th>Día</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for persona in agenda %}
+
+                            <tr>
+                                <td>{{ persona.nombre }}</td>
+                                <td>{{ persona.apellido }}</td>
+                                <td>{{ persona.fecha_nacimiento }}</td>
+                                <td>{{ persona.dia_semana }}</td>
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+                {% else %}
+
+                <div class="alert alert-info">
+                    Todavía no hay personas registradas.
+                </div>
+
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
